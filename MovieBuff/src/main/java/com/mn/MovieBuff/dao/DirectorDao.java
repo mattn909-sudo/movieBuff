@@ -11,9 +11,9 @@ public interface DirectorDao {
 
     List<Director> getAllDirectors();
 
-    List<Movie> getAllMoviesByDirector();
+    List<Movie> getAllMoviesByDirector(int id);
 
-    Director getDirectorById();
+    Director getDirectorById(int id);
 
     void updateDirector(Director director);
 

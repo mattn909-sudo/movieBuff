@@ -10,7 +10,7 @@ public class Movie {
 
     private List<Review> movieReviews;
 
-    private List<Director> movieDirectors;
+    private Director movieDirector;
 
     private List<Actor> movieActors;
 
@@ -38,12 +38,12 @@ public class Movie {
         this.movieReviews = movieReviews;
     }
 
-    public List<Director> getMovieDirectors() {
-        return movieDirectors;
+    public Director getMovieDirectors() {
+        return movieDirector;
     }
 
     public void setMovieDirectors(List<Director> movieDirectors) {
-        this.movieDirectors = movieDirectors;
+        this.movieDirector = movieDirector;
     }
 
     public List<Actor> getMovieActors() {
