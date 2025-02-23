@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao{
     public User createNewUser(User user) {
         final String CREATE_USER = "INSERT INTO user(username, password, name) VALUES(? , ? , ?)";
         jdbc.update(CREATE_USER, user.getUsername(), user.getPassword(), user.getName());
-        return user;
+        return getUserByUsername(user.getUsername());
     }
 
     public List<User> getAllUsers() {
@@ -32,7 +32,12 @@ public class UserDaoImpl implements UserDao{
         return jdbc.queryForObject("SELECT * FROM user WHERE user_id = ?", new UserMapper(), userId);
     }
 
-    public void updateUser(User user) {
+    public User getUserByUsername(String userName) {
+
+        return jdbc.queryForObject("SELECT * FROM user WHERE username = ?", new UserMapper(), userName);
+    }
+
+    public User updateUser(User user, int userId) {
 
         final String UPDATE_STRING = "UPDATE user SET username = ?, password = ?, name = ? WHERE user_id = ?";
 
@@ -40,9 +45,10 @@ public class UserDaoImpl implements UserDao{
                 user.getUsername(),
                 user.getPassword(),
                 user.getName(),
-                user.getUserId()
+                userId
                 );
 
+        return getUserByUsername(user.getUsername());
     }
 
     public void deleteUser(int userId) {

@@ -13,7 +13,9 @@ public interface UserDao {
 
     User getUserById(int userId);
 
-    void updateUser(User user);
+    User getUserByUsername(String userName);
+
+    User updateUser(User user, int id);
 
     void deleteUser(int userId);
 

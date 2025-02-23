@@ -5,16 +5,13 @@ import com.mn.MovieBuff.dto.Movie;
 import com.mn.MovieBuff.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class Controller {
+public class UserController {
 
     @Autowired
     UserDaoImpl userDao;
@@ -33,15 +30,32 @@ public class Controller {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/name/{userName}")
+    public ResponseEntity<User> getUserById(@PathVariable String userName){
+        User user = userDao.getUserByUsername(userName);
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("/favorites/{id}")
     public List<Movie> getUserFavorites(@PathVariable int id){
         return userDao.getAllUserFavorites(id);
     }
 
-//    @GetMapping("/watchlist/{id}")
-//    public List<Movie> getUserWatchlist(@PathVariable int id){
-//        return userDao.getAllUserFavorites(id);
-//    }
+    @GetMapping("/watchlist/{id}")
+    public List<Movie> getUserWatchlist(@PathVariable int id){
+       return userDao.getAllUserWatchlist(id);
+    }
 
+    @PostMapping("/add")
+    public User addNewUser(@RequestBody User user) {
+
+        return userDao.createNewUser(user);
+
+    }
+
+    @PutMapping("update/{id}")
+    public User updateUser(@RequestBody User user, @PathVariable int id){
+        return userDao.updateUser(user, id);
+    }
 
 }
