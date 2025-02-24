@@ -18,32 +18,32 @@ public class UserController {
 
 
     @GetMapping("/all")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
 
         return userDao.getAllUsers();
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id){
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
         User user = userDao.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/name/{userName}")
-    public ResponseEntity<User> getUserById(@PathVariable String userName){
+    public ResponseEntity<User> getUserById(@PathVariable String userName) {
         User user = userDao.getUserByUsername(userName);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/favorites/{id}")
-    public List<Movie> getUserFavorites(@PathVariable int id){
+    public List<Movie> getUserFavorites(@PathVariable int id) {
         return userDao.getAllUserFavorites(id);
     }
 
     @GetMapping("/watchlist/{id}")
-    public List<Movie> getUserWatchlist(@PathVariable int id){
-       return userDao.getAllUserWatchlist(id);
+    public List<Movie> getUserWatchlist(@PathVariable int id) {
+        return userDao.getAllUserWatchlist(id);
     }
 
     @PostMapping("/add")
@@ -54,8 +54,14 @@ public class UserController {
     }
 
     @PutMapping("update/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable int id){
+    public User updateUser(@RequestBody User user, @PathVariable int id) {
         return userDao.updateUser(user, id);
     }
+
+    @DeleteMapping("delete/{userId}")
+    public void deleteUser(@PathVariable int userId) {
+        userDao.deleteUser(userId);
+    }
+
 
 }
